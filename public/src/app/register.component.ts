@@ -9,7 +9,7 @@ import { AuthService } from './auth.service'
   template: `
    <mat-card>
     <mat-card-header>
-        <mat-card-title>Register New User</mat-card-title>
+        <mat-card-title><h4>Register New User</h4></mat-card-title>
     </mat-card-header>
     <mat-card-content>
         <form>
@@ -19,6 +19,15 @@ import { AuthService } from './auth.service'
             <mat-form-field>
                 <input [(ngModel)]="registerData.password" name="password" matInput placeholder="Password" type="password">
             </mat-form-field>
+            <br>
+            <mat-form-field>
+                <input [(ngModel)]="registerData.name" name="name" matInput placeholder="Name" type="text">
+            </mat-form-field>
+            <br>
+            <mat-form-field style="width:100%">
+                <textarea [(ngModel)]="registerData.description" name="description" matInput placeholder="Description" type="text" ></textarea>
+            </mat-form-field>
+            <br>
             <button (click)="post()" mat-raised-button color="primary">Register</button>
         </form>
     </mat-card-content>

@@ -12,7 +12,7 @@ import { AuthService } from './auth.service'
   template: `
    <mat-card>
     <mat-card-header>
-        <mat-card-title>Login</mat-card-title>
+        <mat-card-title><h4>Login</h4></mat-card-title>
     </mat-card-header>
     <mat-card-content>
         <form>

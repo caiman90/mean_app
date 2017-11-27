@@ -10,7 +10,7 @@ export class ApiService {
   constructor( private http: Http) {}
 
   getMessages(){
-    this.http.get('http://localhost:3000/posts').subscribe(res => {
+    this.http.get('http://localhost:3000/messages').subscribe(res => {
         this.messages = res.json();
       })
   }
