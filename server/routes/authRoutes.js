@@ -37,7 +37,6 @@ module.exports = function(app) {
         console.log(error)
         res.sendStatus(500)
         }
-        res.sendStatus(200)
     })
 
     app.post('/login',async (req, res) => {
