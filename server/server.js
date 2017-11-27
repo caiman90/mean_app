@@ -5,6 +5,7 @@ var express = require('express')
 var cors = require('cors')
 var bodyParser = require('body-parser')
 var mongoose= require('mongoose')
+var jwt = require('jwt-simple')
 var app = express()
 
 var User = require('./models/User.js')
@@ -29,6 +30,26 @@ app.post('/register',(req, res) => {
 
         res.sendStatus(200)
     })
+})
+
+app.post('/login',async (req, res) => {
+    var userData = req.body;
+    console.log(userData)
+    var user = await User.findOne({email: userData.email})
+
+    if(!user)
+        return res.status(401).send({message: 'Email or password invalid'})
+
+    if(userData.password != user.password)
+        return res.status(401).send({message: 'Email or password invalid'})
+
+    var payload = {}
+    // in prod loac from config file
+    var token = jwt.encode(payload,'123');
+
+    console.log(token)
+    res.status(200).send({token})
+
 })
 
 mongoose.connect('mongodb://test:test@ds121726.mlab.com:21726/mean_web_app',{useMongoClient:true},(err)=>{

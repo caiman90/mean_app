@@ -2,7 +2,7 @@
  * Created by rejhan on 26.11.2017.
  */
 import { Component } from '@angular/core';
-import { ApiService } from './api.service'
+import { AuthService } from './auth.service'
 
 @Component({
   selector: 'register',
@@ -27,11 +27,10 @@ import { ApiService } from './api.service'
 })
 export class RegisterComponent {
  registerData = { }
- constructor (private apiService: ApiService){}
+ constructor (private authService: AuthService){}
 
   post(){
-    console.log(this.registerData)
-    this.apiService.registerUser(this.registerData)
+    this.authService.registerUser(this.registerData)
  }
 
 }
