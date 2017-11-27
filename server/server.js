@@ -9,7 +9,7 @@ var jwt = require('jwt-simple')
 var app = express()
 
 var User = require('./models/User.js')
-
+mongoose.Promise = Promise
 var posts = [
     {message:'hello'},
     {message:'From Express Server '}
@@ -31,7 +31,25 @@ app.post('/register',(req, res) => {
         res.sendStatus(200)
     })
 })
-
+app.get('/users',async (req, res) =>{
+    try {
+        var users = await User.find({},'-password -__v')
+        res.send(users)
+    }catch (error){
+        console.log(error)
+        res.sendStatus(500)
+    }
+})
+app.get('/profile/:id',async (req, res) =>{
+    try {
+        var user = await User.findById(req.params.id,'-password -__v')
+        res.send(user)
+    }catch (error){
+        console.log(error)
+        res.sendStatus(500)
+    }
+    res.sendStatus(200)
+})
 app.post('/login',async (req, res) => {
     var userData = req.body;
     console.log(userData)

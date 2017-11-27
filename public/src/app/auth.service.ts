@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core'
 
 @Injectable()
 export class AuthService {
+  users = [];
   constructor( private http: Http) {}
 
   registerUser(registerData){
@@ -16,6 +17,12 @@ export class AuthService {
     this.http.post('http://localhost:3000/login',loginData).subscribe(res => {
       console.log(res)
       localStorage.setItem('token',res.json().token)
+    })
+  }
+  getAllUsers(){
+    this.http.get('http://localhost:3000/users').subscribe(res => {
+      this.users = res.json();
+      console.log(res)
     })
   }
 }

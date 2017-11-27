@@ -9,6 +9,8 @@ import { Component } from '@angular/core';
         <button mat-button routerLink="/home">Home</button>
         <button mat-button routerLink="/register">Register</button>
         <button mat-button routerLink="/login">Login</button>
+        <button mat-button routerLink="/admin">Admin</button>
+
     </mat-toolbar>     
     <router-outlet></router-outlet>
 `
