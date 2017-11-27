@@ -13,8 +13,6 @@ import { ApiService } from './api.service'
   `
 })
 export class MessagesComponent {
-  title = 'MyApp';
-
   constructor (private apiService: ApiService){}
 
   ngOnInit(){
