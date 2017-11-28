@@ -11,10 +11,14 @@ module.exports = (app) =>  {
     // authenticated midlleware
     function checkAuthenticated(req,res,next){
 
-        if(!req.header('authorization'))
+        if(!req.header('authorization')){
+            console.log("missing auth")
             res.status(401).send({message: 'Unauthorized. Missing Auht Header'})
+
+        }
         // becasue of "token" spearation on client side see authInterceptor
         var token = req.header('authorization').split(' ')[1]
+        console.log(token)
 
         var payload = jwt.decode(token,'123');
 
@@ -29,11 +33,16 @@ module.exports = (app) =>  {
     app.post('/register',(req, res) => {
          var registerData = req.body;
          var user = new User(registerData)
-         user.save((err,result)=>{
-            if(err)
-             console.log('Error saving user : ' + err)
 
-             res.sendStatus(200)
+         user.save((err,newUser)=>{
+            if(err)
+             res.status(500).send({ message: 'Error saving user'})
+
+
+            var payload = {sub: newUser._id}
+            // in prod load from config file
+            var token = jwt.encode(payload,'123');
+            res.status(200).send({token})
          })
     })
 

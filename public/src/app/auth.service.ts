@@ -3,12 +3,13 @@
  */
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
+import { environment } from '../environments/environment'
 
 @Injectable()
 export class AuthService {
   users = [];
    // move this to config file
-  path = 'http://localhost:3000/'
+  path = environment.path
   TOKEN_KEY='token'
 
   constructor( private http: HttpClient) {}
@@ -19,26 +20,30 @@ export class AuthService {
   get isAuthenticated(){
     return !!localStorage.getItem(this.TOKEN_KEY)
   }
-
+  logout(){
+    localStorage.removeItem(this.TOKEN_KEY)
+  }
   registerUser(registerData){
     this.http.post(this.path + 'register', registerData).subscribe(res => {
+      this.saveToken(res)
     })
   }
 
   login(loginData){
     this.http.post<any>(this.path + 'login', loginData).subscribe(res => {
-      console.log(res)
-      localStorage.setItem(this.TOKEN_KEY,res.token)
+       this.saveToken(res)
     })
   }
-
-  getAllUsers(){
-    this.http.get(this.path + 'users').subscribe(res => {
+   getAllUsers(){
+    this.http.get<any>(this.path + 'users').subscribe(res => {
       this.users = res;
     })
   }
 
   getProfile(id){
     return this.http.get(this.path + 'profile/'+id)
+  }
+  saveToken(response){
+    localStorage.setItem(this.TOKEN_KEY,response.token)
   }
 }
