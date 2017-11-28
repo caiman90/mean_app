@@ -6,7 +6,25 @@ var bcrypt = require('bcrypt-nodejs')
 var User = require('../models/User.js')
 
 
-module.exports = function(app) {
+module.exports = (app) =>  {
+
+    // authenticated midlleware
+    function checkAuthenticated(req,res,next){
+
+        if(!req.header('authorization'))
+            res.status(401).send({message: 'Unauthorized. Missing Auht Header'})
+        // becasue of "token" spearation on client side see authInterceptor
+        var token = req.header('authorization').split(' ')[1]
+
+        var payload = jwt.decode(token,'123');
+
+        if(!payload)
+            return res.status(401).send({message: 'Unauthorized. Auth Header Invalid'})
+
+        req.userId = payload.sub
+        console.log(payload)
+        next()
+    }
 
     app.post('/register',(req, res) => {
          var registerData = req.body;
@@ -19,8 +37,9 @@ module.exports = function(app) {
          })
     })
 
-    app.get('/users',async (req, res) =>{
+    app.get('/users',checkAuthenticated,async (req, res) =>{
         try {
+            console.log(req.userId)
             var users = await User.find({},'-password -__v')
             res.send(users)
         }catch (error){
@@ -50,7 +69,7 @@ module.exports = function(app) {
         if(!isMatch)
          return res.status(401).send({message: 'Email or password invalid'})
 
-         var payload = {}
+         var payload = {sub: user._id}
              // in prod load from config file
          var token = jwt.encode(payload,'123');
          res.status(200).send({token})

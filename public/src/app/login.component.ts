@@ -16,7 +16,7 @@ import { AuthService } from './auth.service'
     </mat-card-header>
     <mat-card-content>
         <form>
-            <mat-form-field>
+            <mat-form-field> 
                 <input [(ngModel)]="loginData.email" name="email" matInput placeholder="Email" type="email">
             </mat-form-field>
             <mat-form-field>

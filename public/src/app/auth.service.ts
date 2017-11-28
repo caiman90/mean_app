@@ -1,31 +1,44 @@
 /**
  * Created by rejhan on 27.11.2017.
  */
-import { Http } from '@angular/Http'
+import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 
 @Injectable()
 export class AuthService {
   users = [];
-  constructor( private http: Http) {}
+   // move this to config file
+  path = 'http://localhost:3000/'
+  TOKEN_KEY='token'
+
+  constructor( private http: HttpClient) {}
+
+  get token(){
+    return localStorage.getItem(this.TOKEN_KEY)
+  }
+  get isAuthenticated(){
+    return !!localStorage.getItem(this.TOKEN_KEY)
+  }
 
   registerUser(registerData){
-    this.http.post('http://localhost:3000/register',registerData).subscribe(res => {
+    this.http.post(this.path + 'register', registerData).subscribe(res => {
     })
   }
+
   login(loginData){
-    this.http.post('http://localhost:3000/login',loginData).subscribe(res => {
+    this.http.post<any>(this.path + 'login', loginData).subscribe(res => {
       console.log(res)
-      localStorage.setItem('token',res.json().token)
+      localStorage.setItem(this.TOKEN_KEY,res.token)
     })
   }
+
   getAllUsers(){
-    this.http.get('http://localhost:3000/users').subscribe(res => {
-      this.users = res.json();
-      console.log(res)
+    this.http.get(this.path + 'users').subscribe(res => {
+      this.users = res;
     })
   }
+
   getProfile(id){
-    return this.http.get('http://localhost:3000/profile/'+id)
+    return this.http.get(this.path + 'profile/'+id)
   }
 }

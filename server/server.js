@@ -12,7 +12,7 @@ app.use(bodyParser.json())
 
 require('./routes/authRoutes')(app)
 require('./routes/mainRoutes')(app)
-require('./db')()
+require('./models/db')()
 
 app.listen(3000,() => {
         console.log("Server has been started")

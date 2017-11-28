@@ -21,6 +21,7 @@ import { ActivatedRoute } from '@angular/router'
         
     </mat-card-content>
    </mat-card>
+   <messages></messages>
 `
 })
 export class ProfileComponent {
@@ -29,7 +30,7 @@ export class ProfileComponent {
 
   ngOnInit(){
     var id = this.route.snapshot.params.id
-    this.authService.getProfile(id).subscribe(data => this.profile = data.json())
+    this.authService.getProfile(id).subscribe(data => this.profile = data)
   }
 
 }
