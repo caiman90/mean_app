@@ -12,18 +12,15 @@ module.exports = (app) =>  {
     function checkAuthenticated(req,res,next){
 
         if(!req.header('authorization')){
-            console.log("missing auth")
-            res.status(401).send({message: 'Unauthorized. Missing Auht Header'})
-
+            return res.status(401).send({message: 'Unauthorized. Missing Authorization Header'})
         }
         // becasue of "token" spearation on client side see authInterceptor
         var token = req.header('authorization').split(' ')[1]
-        console.log(token)
 
         var payload = jwt.decode(token,'123');
 
         if(!payload)
-            return res.status(401).send({message: 'Unauthorized. Auth Header Invalid'})
+            return res.status(401).send({message: 'Unauthorized. Authorization Header Invalid'})
 
         req.userId = payload.sub
         console.log(payload)
