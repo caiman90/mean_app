@@ -14,14 +14,15 @@ export class ApiService {
     this.messages = []
   }
 
-
   getMessages(userId){
-    this.http.get<any>(this.path + '/posts/' + userId).subscribe(res => {
-        this.messages = res;
-      })
+    this.http.get<any>(this.path + 'posts/' + userId).subscribe(res => {
+      this.messages = res;
+    })
   }
 
   postMessage(message){
     this.http.post(this.path + '/post', message)
   }
+
+
 }

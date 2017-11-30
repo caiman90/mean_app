@@ -16,10 +16,12 @@ import { LoginComponent } from './login.component'
 import { UsersComponent } from './users.component'
 import { ProfileComponent } from './profile.component'
 import { PostComponent } from './post.component'
+import { HomeComponent } from  './home.component'
 import { AuthInterceptorService } from './authInterceptor.service'
 
 const routes = [
-  {path:'home',component: PostComponent},
+  {path:'home',component: HomeComponent},
+  {path:'post',component: PostComponent},
   {path:'register',component: RegisterComponent},
   {path:'login',component: LoginComponent},
   {path:'admin',component: UsersComponent},
@@ -28,7 +30,7 @@ const routes = [
 
 @NgModule({
   declarations: [
-    AppComponent,MessagesComponent,RegisterComponent,LoginComponent,UsersComponent,ProfileComponent,PostComponent
+    AppComponent,MessagesComponent,RegisterComponent,LoginComponent,UsersComponent,ProfileComponent,PostComponent,HomeComponent
   ],
   imports: [
     BrowserModule,

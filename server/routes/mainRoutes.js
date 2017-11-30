@@ -5,14 +5,9 @@
 var Post = require('../models/Post')
 
 module.exports = (app) => {
-    // get All posts
-    app.get('/posts/:id',async (req, res) => {
-        var author = req.params.id
-        var posts = await Post.find({author})
-        res.status(200).send(posts)
-    })
+
     // Saving Post
-    app.post('/post', (req,res) => {
+    app.post('/post',require('./authMiddleware'),(req,res) => {
         var postData = req.body
         console.log(postData)
         postData.author = '5a1c298a11f2fc0d887b029d'
@@ -26,7 +21,7 @@ module.exports = (app) => {
         })
     })
     // get Post by ID
-    app.get('/post/:id',async (req, res) =>{
+    app.get('/post/:id',require('./authMiddleware'),async (req, res) =>{
         try {
             var user = await User.findById(req.params.id,'-password -__v')
         res.status(200).send(user)
@@ -35,5 +30,11 @@ module.exports = (app) => {
         res.sendStatus(500)
         }
     })
+    // get Users posts
+    app.get('/posts/:id',async (req, res) => {
+        var author = req.params.id
+        var posts = await Post.find({author})
+        res.status(200).send(posts)
+})
 }
 
