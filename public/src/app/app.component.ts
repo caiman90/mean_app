@@ -6,7 +6,7 @@ import { AuthService } from './auth.service'
     <mat-toolbar>
         Rejhan Mean Web App
         <span style="flex: 1 1 auto"></span>
-        <button mat-button routerLink="/home">Home</button>
+        <button mat-button routerLink="/">Home</button>
         <button mat-button routerLink="/post" *ngIf="authService.isAuthenticated" >Post</button>
         <button *ngIf="!authService.isAuthenticated" mat-button routerLink="/register">Register</button>
         <button *ngIf="!authService.isAuthenticated" mat-button routerLink="/login">Login</button>

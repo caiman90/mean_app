@@ -9,8 +9,7 @@ module.exports = (app) => {
     // Saving Post
     app.post('/post',require('./authMiddleware'),(req,res) => {
         var postData = req.body
-        console.log(postData)
-        postData.author = '5a1c298a11f2fc0d887b029d'
+        postData.author = req.userId
         var post = new Post(postData)
         post.save((err,result)=>{
         if(err){

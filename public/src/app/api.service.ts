@@ -21,7 +21,10 @@ export class ApiService {
   }
 
   postMessage(message){
-    this.http.post(this.path + '/post', message)
+
+    this.http.post(this.path + 'post', message).subscribe(res => {
+
+    })
   }
 
 

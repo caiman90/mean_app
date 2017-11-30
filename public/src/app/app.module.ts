@@ -20,7 +20,7 @@ import { HomeComponent } from  './home.component'
 import { AuthInterceptorService } from './authInterceptor.service'
 
 const routes = [
-  {path:'home',component: HomeComponent},
+  {path:'',component: HomeComponent},
   {path:'post',component: PostComponent},
   {path:'register',component: RegisterComponent},
   {path:'login',component: LoginComponent},

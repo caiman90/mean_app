@@ -18,6 +18,7 @@ export class PostComponent {
   constructor (private apiService: ApiService){}
   postMsg = ''
   postFeed(){
+    console.log("post"+this.postMsg)
     this.apiService.postMessage({message: this.postMsg});
   }
 }
