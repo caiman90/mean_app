@@ -16,7 +16,6 @@ export class LoginComponent {
   constructor (private authService: AuthService){}
 
   login(){
-    console
     this.authService.login(this.loginData)
   }
 

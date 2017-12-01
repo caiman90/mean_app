@@ -14,8 +14,7 @@ export class ProfileComponent {
   constructor (private authService: AuthService,private route: ActivatedRoute){}
 
   ngOnInit(){
-    var id = this.route.snapshot.params.id
-    this.authService.getProfile(id).subscribe(data => this.profile = data)
+    this.authService.getProfile().subscribe(data => this.profile = data)
   }
 
 }

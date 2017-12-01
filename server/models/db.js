@@ -11,5 +11,5 @@ module.exports = function() {
             console.log('Connected to Mongo')
         else
             console.log(err)
-})
+    })
 }

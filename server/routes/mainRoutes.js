@@ -5,7 +5,6 @@
 var Post = require('../models/Post')
 
 module.exports = (app) => {
-
     // Saving Post
     app.post('/post',require('./authMiddleware'),(req,res) => {
         var postData = req.body
@@ -20,20 +19,28 @@ module.exports = (app) => {
         })
     })
     // get Post by ID
-    app.get('/post/:id',require('./authMiddleware'),async (req, res) =>{
+    app.get('/post/:id',require('./authMiddleware'),async (req, res) => {
         try {
             var user = await User.findById(req.params.id,'-password -__v')
-        res.status(200).send(user)
+            res.status(200).send(user)
         }catch (error){
-        console.log(error)
-        res.sendStatus(500)
+            console.log(error)
+            res.sendStatus(500)
         }
     })
     // get Users posts
-    app.get('/posts/:id',async (req, res) => {
-        var author = req.params.id
+    app.get('/posts/:id',require('./authMiddleware'),async (req, res) => {
+        var author = req.userId
         var posts = await Post.find({author})
         res.status(200).send(posts)
-})
+    })
+
+    app.post('/post/delete',async (req, res) => {
+        var postId = req.body.postId
+        Post.remove({_id: postId}, function (err, user) {
+            if (err) return res.send(err);
+            res.json({ message: 'Deleted' });
+     });
+    })
 }
 

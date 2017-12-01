@@ -19,5 +19,6 @@ export class PostComponent {
   postMsg = ''
   postFeed(){
     this.postService.postMessage({message: this.postMsg});
+    this.postMsg = ''
   }
 }

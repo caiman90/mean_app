@@ -5,10 +5,12 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { environment } from '../../../environments/environment'
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class AuthService {
   users = [];
+  username = ''
    // move this to config file
   path = environment.path + environment.auth
   TOKEN_KEY='token'
@@ -21,6 +23,9 @@ export class AuthService {
   }
   get isAuthenticated(){
     return !!localStorage.getItem(this.TOKEN_KEY)
+  }
+  getUsername(){
+    return this.username
   }
   logout(){
     localStorage.removeItem(this.TOKEN_KEY)
@@ -36,8 +41,9 @@ export class AuthService {
 
   login(loginData){
     this.http.post<any>(this.path + 'login', loginData).subscribe(res => {
-       this.saveToken(res)
-       this.router.navigate([''])
+      this.saveToken(res)
+      this.username = res.user
+      this.router.navigate([''])
     })
   }
    getAllUsers(){
@@ -46,8 +52,8 @@ export class AuthService {
     })
   }
 
-  getProfile(id){
-    return this.http.get(this.path + 'profile/'+id)
+  getProfile(){
+    return this.http.get(this.path + 'profile/')
 
   }
   saveToken(response){

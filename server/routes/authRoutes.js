@@ -36,7 +36,7 @@ var router = express.Router()
          var payload = {sub: user._id}
         // in prod load from config file
          var token = jwt.encode(payload,'123');
-         res.status(200).send({token})
+         res.status(200).send({token:token,user:user.name})
         })
     })
 
@@ -51,9 +51,9 @@ var router = express.Router()
     })
 
     // get User details
-    router.get('/profile/:id',require('./authMiddleware'),async (req, res) =>{
+    router.get('/profile',require('./authMiddleware'),async (req, res) =>{
         try {
-            var user = await User.findById(req.params.id,'-password -__v')
+            var user = await User.findById(req.userId,'-password -__v')
             res.status(200).send(user)
         }catch (error){
             console.log(error)

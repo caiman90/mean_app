@@ -13,7 +13,9 @@ import { ActivatedRoute } from '@angular/router'
         <mat-card-title><h4>User Posts</h4></mat-card-title>
     </mat-card-header>
     <div *ngFor="let message of postService.messages">
-    <mat-card>{{message.message}}</mat-card>
+    <mat-card>{{message.message}}
+          <button (click)="deletePost(message._id)" mat-raised-button color="primary">Delete Post</button>
+    </mat-card>
     </div>
     </mat-card>
   `
@@ -24,5 +26,10 @@ export class PostsComponent {
   ngOnInit(){
     var userId = this.route.snapshot.params.id
     this.postService.getPosts(userId);
+  }
+  deletePost(postId){
+    this.postService.deletePost(postId).subscribe(res =>{
+      this.postService.messages = this.postService.messages.filter(post => post._id !== postId);
+    })
   }
 }

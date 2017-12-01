@@ -25,7 +25,7 @@ const routes = [
   {path:'register',component: RegisterComponent},
   {path:'login',component: LoginComponent},
   {path:'admin',component: UsersComponent},
-  {path:'profile/:id',component: ProfileComponent}
+  {path:'profile',component: ProfileComponent}
 ]
 
 @NgModule({
