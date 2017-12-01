@@ -3,10 +3,10 @@
  */
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { environment } from '../environments/environment'
+import { environment } from '../../environments/environment'
 
 @Injectable()
-export class ApiService {
+export class PostService {
   messages
   path = environment.path
 
@@ -14,7 +14,7 @@ export class ApiService {
     this.messages = []
   }
 
-  getMessages(userId){
+  getPosts(userId){
     this.http.get<any>(this.path + 'posts/' + userId).subscribe(res => {
       this.messages = res;
     })

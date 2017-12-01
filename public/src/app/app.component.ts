@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthService } from './auth.service'
+import { AuthService } from  './auth/authService/auth.service'
+
 @Component({
   selector: 'app-root',
   template: `

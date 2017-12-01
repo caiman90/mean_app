@@ -2,10 +2,10 @@
  * Created by rejhan on 28.11.2017.
  */
 import { Component } from '@angular/core';
-import { ApiService } from './api.service'
+import { PostService } from './post.service'
 
 @Component({
-  selector: 'posts',
+  selector: 'post',
   template: `
      <mat-form-field style="width:100%">
                 <textarea [(ngModel)]="postMsg" name="postMsg" matInput placeholder="Post" type="text" ></textarea>
@@ -15,10 +15,9 @@ import { ApiService } from './api.service'
   `
 })
 export class PostComponent {
-  constructor (private apiService: ApiService){}
+  constructor (private postService: PostService){}
   postMsg = ''
   postFeed(){
-    console.log("post"+this.postMsg)
-    this.apiService.postMessage({message: this.postMsg});
+    this.postService.postMessage({message: this.postMsg});
   }
 }

@@ -7,17 +7,17 @@ import { MatButtonModule,MatCardModule,MatToolbarModule,MatInputModule,MatListMo
 import { FormsModule } from '@angular/forms'
 
 import { AppComponent } from './app.component'
-import { ApiService } from './api.service'
-import { AuthService } from './auth.service'
+import { PostService } from './post/post.service'
+import { AuthService } from './auth/authService/auth.service'
 
-import { MessagesComponent } from './messages.component'
-import { RegisterComponent } from './register.component'
-import { LoginComponent } from './login.component'
-import { UsersComponent } from './users.component'
-import { ProfileComponent } from './profile.component'
-import { PostComponent } from './post.component'
-import { HomeComponent } from  './home.component'
-import { AuthInterceptorService } from './authInterceptor.service'
+import { PostsComponent } from './post/posts.component'
+import { RegisterComponent } from './auth/register.component'
+import { LoginComponent } from './auth/login.component'
+import { UsersComponent } from './auth/users.component'
+import { ProfileComponent } from './auth/profile.component'
+import { PostComponent } from './post/post.component'
+import { HomeComponent } from  './home/home.component'
+import { AuthInterceptorService } from './auth/authService/authInterceptor.service'
 
 const routes = [
   {path:'',component: HomeComponent},
@@ -30,7 +30,7 @@ const routes = [
 
 @NgModule({
   declarations: [
-    AppComponent,MessagesComponent,RegisterComponent,LoginComponent,UsersComponent,ProfileComponent,PostComponent,HomeComponent
+    AppComponent,PostsComponent,RegisterComponent,LoginComponent,UsersComponent,ProfileComponent,PostComponent,HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +44,7 @@ const routes = [
     BrowserAnimationsModule,
     MatListModule
   ],
-  providers: [ApiService,AuthService,{
+  providers: [PostService,AuthService,{
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptorService,
     multi: true

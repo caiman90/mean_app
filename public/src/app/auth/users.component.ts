@@ -2,7 +2,7 @@
  * Created by rejhan on 27.11.2017.
  */
 import { Component } from '@angular/core';
-import { AuthService } from './auth.service'
+import { AuthService } from './authService/auth.service'
 
 @Component({
   selector: 'users',

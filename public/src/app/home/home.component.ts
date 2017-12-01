@@ -5,7 +5,6 @@
  * Created by rejhan on 26.11.2017.
  */
 import { Component } from '@angular/core';
-import { ApiService } from './api.service'
 
 @Component({
   selector: 'home',
@@ -27,9 +26,6 @@ import { ApiService } from './api.service'
   `
 })
 export class HomeComponent {
-  constructor (private apiService: ApiService){}
 
-  ngOnInit(){
-    // call home message from service
-  }
+
 }
