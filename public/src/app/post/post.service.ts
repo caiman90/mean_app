@@ -20,9 +20,7 @@ export class PostService {
     })
   }
   postMessage(message){
-    this.http.post(this.path + 'post', message).subscribe(res => {
-
-    })
+    this.http.post(this.path + 'post', message).subscribe(res =>{})
   }
   deletePost(postId){
     return this.http.post(this.path + 'post/delete',{postId: postId})

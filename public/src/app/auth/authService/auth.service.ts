@@ -30,17 +30,18 @@ export class AuthService {
   logout(){
     localStorage.removeItem(this.TOKEN_KEY)
     this.router.navigate(['login'])
-
+    this.username = ''
   }
-  registerUser(registerData){
-    this.http.post(this.path + 'register', registerData).subscribe(res => {
+  registerUser(user){
+    this.http.post<any>(this.path + 'register', user).subscribe(res => {
       this.saveToken(res)
+      this.username = res.user
       this.router.navigate([''])
     })
   }
 
-  login(loginData){
-    this.http.post<any>(this.path + 'login', loginData).subscribe(res => {
+  login(user){
+    this.http.post<any>(this.path + 'login', user).subscribe(res => {
       this.saveToken(res)
       this.username = res.user
       this.router.navigate([''])
@@ -53,7 +54,7 @@ export class AuthService {
   }
 
   getProfile(){
-    return this.http.get(this.path + 'profile/')
+    return this.http.get<any>(this.path + 'profile/')
 
   }
   saveToken(response){

@@ -11,11 +11,11 @@ module.exports = (app) => {
         postData.author = req.userId
         var post = new Post(postData)
         post.save((err,result)=>{
-        if(err){
-            console.error('Error saving post : ' + err)
-            res.status(500).send({message:'Saving post error'})
-        }
-        res.sendStatus(200)
+            if(err){
+                 console.error('Error saving post : ' + err)
+                 res.status(500).send({message:'Saving post error'})
+            }
+            res.sendStatus(200)
         })
     })
     // get Post by ID

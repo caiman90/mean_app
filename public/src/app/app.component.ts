@@ -12,7 +12,6 @@ import { AuthService } from  './auth/authService/auth.service'
         <button *ngIf="!authService.isAuthenticated" mat-button routerLink="/register">Register</button>
         <button *ngIf="!authService.isAuthenticated" mat-button routerLink="/login">Login</button>
         <button *ngIf="authService.isAuthenticated"  mat-button routerLink="/profile">Profile</button>
-
         <button *ngIf="authService.isAuthenticated" mat-button (click)="authService.logout()">Logout</button>
     </mat-toolbar>     
     <router-outlet></router-outlet>
@@ -20,7 +19,4 @@ import { AuthService } from  './auth/authService/auth.service'
 })
 export class AppComponent {
   constructor (private authService: AuthService){}
-  onInit(){
-
-  }
 }

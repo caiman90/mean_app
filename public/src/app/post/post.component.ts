@@ -18,7 +18,7 @@ export class PostComponent {
   constructor (private postService: PostService){}
   postMsg = ''
   postFeed(){
-    this.postService.postMessage({message: this.postMsg});
+    this.postService.postMessage({message: this.postMsg})
     this.postMsg = ''
   }
 }

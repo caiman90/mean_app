@@ -14,11 +14,10 @@ var router = express.Router()
             if(err)
              res.status(500).send({ message: 'Error saving user'})
 
-
             var payload = {sub: newUser._id}
             // in prod load from config file
             var token = jwt.encode(payload,'123');
-            res.status(200).send({token})
+            res.status(200).send({token:token,user:user.name})
          })
     })
 
