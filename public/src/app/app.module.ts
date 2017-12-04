@@ -5,6 +5,7 @@ import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MatButtonModule,MatCardModule,MatToolbarModule,MatInputModule,MatListModule} from '@angular/material'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { AppComponent } from './app.component'
 import { PostService } from './post/post.service'
@@ -36,7 +37,7 @@ const routes = [
     BrowserModule,
     HttpClientModule,
     FormsModule,ReactiveFormsModule,
-    MatButtonModule,MatCardModule,MatToolbarModule,MatInputModule,MatListModule,
+    MatButtonModule,MatCardModule,MatToolbarModule,MatInputModule,MatListModule,MatTabsModule,
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
 
