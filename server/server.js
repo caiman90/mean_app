@@ -9,10 +9,11 @@ var app = express()
 var auth = require('./routes/authRoutes')
 app.use(cors())
 app.use(bodyParser.json())
-
+require('./security/helmetConf')(app)
 require('./routes/mainRoutes')(app)
 require('./models/db')()
 app.use('/auth',auth)
+
 app.listen(3000,() => {
         console.log("Server has been started")
 })

@@ -1,7 +1,6 @@
 /**
  * Created by rejhan on 27.11.2017.
  */
-
 var Post = require('../models/Post')
 
 module.exports = (app) => {
